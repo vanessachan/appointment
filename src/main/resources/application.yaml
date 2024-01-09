@@ -1,0 +1,28 @@
+spring:
+  h2:
+    console.enabled: true
+  datasource:
+    url: jdbc:h2:file:./mydb
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+
+  quartz:
+    jdbc:
+      initialize-schema: never
+
+    job-store-type: jdbc
+    overwrite-existing-jobs: true
+
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: https://securetoken.google.com/appointment-80f0c
+          jwk-set-uri: https://www.googleapis.com/robot/v1/metadata/jwk/securetoken@system.gserviceaccount.com
+
