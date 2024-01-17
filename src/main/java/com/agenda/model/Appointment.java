@@ -30,8 +30,9 @@ public class Appointment {
 
     private String description;
 
-    @ManyToOne
-    Person person;
+    @NotEmpty
+    @Column
+    private String userId;
 
 //    @Column
 //    private List<DayOfWeek> days;

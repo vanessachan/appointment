@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.quartz.SchedulerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -22,8 +23,8 @@ AppointmentController {
     private final AppointmentService appointmentService;
 
     @PostMapping("/appointment")
-    public Appointment save(@RequestBody @Valid Appointment appointment) throws SchedulerException {
-         return appointmentService.save(appointment);
+    public Appointment save(@RequestBody @Valid Appointment appointment, Principal principal) throws SchedulerException {
+        return appointmentService.save(appointment);
     }
 
     @PutMapping("/appointment")
@@ -33,8 +34,7 @@ AppointmentController {
 
 
     @GetMapping(value = "/appointment")
-    public List<Appointment> listAll() {
-
+    public List<Appointment> listAll(Principal principal) {
         return appointmentService.listAppointments();
 
     }

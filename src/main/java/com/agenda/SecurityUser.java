@@ -1,14 +1,12 @@
 package com.agenda;
 
-import com.agenda.model.Person;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class SecurityUser {
 
-    public static Long getCurrentUserId(){
-        return 1L;
+    public static String getCurrentUserId(){
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+
     }
 
-    public static Person currentUser() {
-        return  new Person(getCurrentUserId(), "Vanessa", "vanessa@gmail.com", null);
-    }
 }

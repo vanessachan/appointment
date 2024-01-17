@@ -23,7 +23,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     @Transactional
     public Appointment save(Appointment appointment) throws SchedulerException {
-        appointment.setPerson(SecurityUser.currentUser());
+        appointment.setUserId(SecurityUser.getCurrentUserId());
         Appointment appointmentSaved = appointmentRepository.save(appointment);
         schedulerService.schedulJob(appointmentSaved);
         return appointmentSaved;
@@ -31,12 +31,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<Appointment> listAppointments() {
-        return appointmentRepository.findByPersonId(SecurityUser.getCurrentUserId());
+        return appointmentRepository.findByUserId(SecurityUser.getCurrentUserId());
     }
 
     @Override
     public Appointment findAppointment(Long id) {
-        return appointmentRepository.findAppointmentByIdAndPersonId(id, SecurityUser.getCurrentUserId()).orElseThrow(NotFoundException::new);
+        return appointmentRepository.findAppointmentByIdAndUserId(id, SecurityUser.getCurrentUserId()).orElseThrow(NotFoundException::new);
     }
 
     @Override

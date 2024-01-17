@@ -28,7 +28,7 @@ public class CorsFilter implements Filter {
         );
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("X-Frame-Options", "true");
-        if ("OPTIONS" == request.getMethod()) {
+        if ("OPTIONS".equals(request.getMethod())) {
             response.setStatus(200);
         } else {
             chain.doFilter(req, resp);
